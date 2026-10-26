@@ -2,8 +2,8 @@
 
 ## Defaults that avoid repeated design questions
 
-- Support ten teams / thirty participants, normally three people sharing each team desktop. Keep one global ticket owner and durable shared findings.
-- Local Windows entrypoint targets Hyper-V for event VMs, with a Linux central-services guest; reuse WSL/QEMU for preparation and small development rehearsals. A remote Linux/KVM profile can reuse the same provider contract. Do not run ten desktops on this 32-GiB host without measured capacity.
+- Support up to eleven teams of five participants. Each team receives three shared desktop sessions while browser-native services remain on participant laptops. Keep one global ticket owner and durable shared findings.
+- The current local Windows deployment uses two measured 64-GB, 20-thread hosts: 14 desktop slots on the primary and 19 on `worker-02`. Use a smaller validated profile for smaller hosts; do not infer capacity from RAM totals alone.
 - AWS starts with ordinary EC2: one measured central-services host and one desktop per team, private desktop/service ports, an authenticated gateway, no Kubernetes/RDS requirement. These are design defaults to validate, not sized purchases.
 - One coherent active site. Start with planned pause/backup/restore switching and cold standby; add faster failover only after measured recovery requires it. Pre-import images before the event.
 - Public GitHub holds code, fictional answers/content, disk parts, case/native archives, manifests and guides. Private runtime storage holds credentials, roster data, live databases, exports and backups.

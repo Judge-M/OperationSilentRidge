@@ -91,8 +91,8 @@ def verify_bundle(bundle, expected_source_commit=None, distribution_manifest=Non
             distribution = json.loads(Path(distribution_manifest).read_text(encoding='utf-8'))
         except (OSError, ValueError) as exc:
             raise InstallError('cannot read distribution manifest: ' + str(exc)) from exc
-        if distribution.get('repository') != 'Judge-M/Oct26':
-            raise InstallError('distribution repository is not Judge-M/Oct26')
+        if distribution.get('repository') != 'Judge-M/OperationSilentRidge':
+            raise InstallError('distribution repository is not Judge-M/OperationSilentRidge')
         if distribution.get('source_commit') != source_commit:
             raise InstallError('distribution source commit %s differs from bundle %s'
                                % (distribution.get('source_commit'), source_commit))

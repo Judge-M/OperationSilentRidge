@@ -24,15 +24,15 @@ on the selected release and connection.
 ## 1. Get the tooling source (2 min)
 
 ```bash
-git clone --depth 1 --branch <RELEASE_TAG> https://github.com/Judge-M/Oct26.git oct26
-cd oct26
+git clone --depth 1 --branch <RELEASE_TAG> https://github.com/Judge-M/OperationSilentRidge.git operation-silent-ridge
+cd operation-silent-ridge
 ```
 
 ## 2. Download the bundle assets (~13 GB)
 
 ```bash
 mkdir -p work/dl
-gh release download <RELEASE_TAG> --repo Judge-M/Oct26 \
+gh release download <RELEASE_TAG> --repo Judge-M/OperationSilentRidge \
   --pattern "bundle-*" --pattern "validated-images.tar.part-*" \
   --pattern "distribution.json" --dir work/dl
 ```

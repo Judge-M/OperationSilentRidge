@@ -15,8 +15,12 @@ from pathlib import Path
 from ridge.artifacts import safe, sha256
 
 COMPONENTS = {'integration', 'iris', 'ctfd', 'desktop'}
-REPOSITORY = 'Judge-M/Oct26'
+REPOSITORY = 'Judge-M/OperationSilentRidge'
 MAX_ASSET_BYTES = 1024 ** 3
+
+# The GHCR package prefix is intentionally still ``oct26-*``. GitHub repository
+# renames do not rename container packages, and existing offline bundles and
+# event-host caches depend on these immutable package names.
 
 
 def image_lock(images):

@@ -1,7 +1,7 @@
 # Copy this prompt into your coding agent
 
 ```text
-Work on Judge-M/Oct26 using the consolidated replacement PR/current main,
+Work on Judge-M/OperationSilentRidge using the consolidated replacement PR/current main,
 not the retired PR 14–20 branches. First read AGENTS.md, then
 docs/handoff/CONSOLIDATION.md, BUILD-FIRST.md and NEXT.md.
 

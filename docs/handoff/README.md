@@ -115,7 +115,7 @@ Moving computers? Read [Continue elsewhere](CONTINUE-ELSEWHERE.md) first. The ha
 
 **Verdict:** the content and transactional core are substantially further along than the top-level documentation suggests. The repository is not yet an event deployment product. The shortest path is a complete two-team vertical slice, then repeatable provisioning, then ten-team validation, then AWS and migration rehearsals. Avoid adding unrelated content or additional services first.
 
-**Open PR recommendations:** refresh and then merge [#6](https://github.com/Judge-M/Oct26/pull/6); defer [#7](https://github.com/Judge-M/Oct26/pull/7) until the existing event is accepted. Neither PR solves a deployment blocker. Both remain untouched.
+**Open PR recommendations:** refresh and then merge [#6](https://github.com/Judge-M/OperationSilentRidge/pull/6); defer [#7](https://github.com/Judge-M/OperationSilentRidge/pull/7) until the existing event is accepted. Neither PR solves a deployment blocker. Both remain untouched.
 
 ## Intended user experience
 

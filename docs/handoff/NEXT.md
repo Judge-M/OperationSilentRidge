@@ -3,7 +3,58 @@
 Read AGENTS.md and BUILD-FIRST.md. This sequence supersedes assumptions about
 completion in PRs 14–20. Existing task cards provide the detailed requirements.
 
-## Current position (updated 2026-09-24)
+## Current position (updated 2026-10-26)
+
+The GitHub repository is now `Judge-M/OperationSilentRidge`. This reconciliation
+started from `main` at `74673f3` (PR #229). Clone, release-download,
+source-distribution, issue and documentation links must use the new repository
+name. The established `ghcr.io/judge-m/oct26-*` image names remain intentional
+compatibility identifiers; changing them would invalidate published manifests
+and event-host caches.
+
+The current event profile is
+`deployment/profiles/example-dynamic-two-host-11-team.json`: eleven teams of
+five, three shared desktops per team, and exactly 33 desktop slots. The primary
+hosts slots 1–14. `worker-02` hosts slots 15–33 on VNC ports 5901–5919. Browser
+services remain centralized on the primary and use the four trusted
+`*.cyberexperts.org` names on port 443. Registration uses the static room code
+`SILENT-RIDGE`; private handouts supply the generated team credentials.
+
+The participant flow has completed multiple computer-use rehearsals, including
+an end-to-end 20-ticket/80-question run documented under
+`docs/rehearsal/evidence/rehearsal-20261019/`. The current opening and closing
+room briefs are separate PPTX and native ODP decks with embedded accepted MP4
+media. Normal event-day operation uses the Windows boot/logon tasks; a
+facilitator should only power on the worker and primary, wait for registration,
+present the opening deck and begin.
+
+The newest published offline bundle remains `v0.10.0-rehearsal`. It supersedes
+`v0.9.x-drill`, but it predates the current dynamic 11-team, registration and
+boot-automation iteration. Do not replace a verified live installation with
+that older bundle. A future fresh installation needs a release cut from current
+`main`, then the complete cold-install procedure in
+`docs/event-machine-cold-start.md`.
+
+### Next bounded action
+
+1. Merge the repository-rename/current-state reconciliation after CI and review.
+2. Cut and cold-install a new offline release from that merged revision.
+3. Run the full eleven-team human/load rehearsal on both event hosts, including
+   all 33 desktops under representative tool load.
+4. Reboot the worker and primary from powered off and prove the configured
+   startup guarantee. A logon-triggered start is not proof of startup before
+   sign-in.
+5. Freeze the tested revision, runtime/profile copies and operator receipt.
+
+Do not claim full eleven-team performance certification or unattended
+startup-before-sign-in until those two acceptance runs pass. AWS remains
+deferred unless the organizer reopens that track.
+
+## Historical implementation record (2026-09-24)
+
+The material below records how the first rehearsal bundle and lifecycle were
+built. It is useful provenance, but it does not override the current position
+above.
 
 N1–N5 are done (receipts in this directory). **F03 is in progress**: load
 tooling merged (PR #43), runbook + dress-rehearsal fixes + `--teams N`

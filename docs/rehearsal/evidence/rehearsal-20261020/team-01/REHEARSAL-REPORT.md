@@ -1,6 +1,6 @@
 # Participant rehearsal rerun 3 — 2026-10-20
 
-This was a fresh, browser-only participant run against the event machine after the participant-flow improvements in PR [#222](https://github.com/Judge-M/Oct26/pull/222). A newly registered team used IRIS to claim work, CTFd to unlock the explicit walkthroughs and submit answers, Wazuh Discover to query the prepared telemetry view, and the browser-local correlation and capstone workspaces to structure the final assessment.
+This was a fresh, browser-only participant run against the event machine after the participant-flow improvements in PR [#222](https://github.com/Judge-M/OperationSilentRidge/pull/222). A newly registered team used IRIS to claim work, CTFd to unlock the explicit walkthroughs and submit answers, Wazuh Discover to query the prepared telemetry view, and the browser-local correlation and capstone workspaces to structure the final assessment.
 
 No generated password or private registration/retrieval link appears in this report or its screenshots.
 
