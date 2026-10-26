@@ -8,7 +8,7 @@ to the existing runbooks and only adds order, gates, and evidence capture.
 
 Hard rules (from the F06 card, non-negotiable):
 
-- Use **only** the published bundle and the private profile on the event
+- Use **only** a verified bundle built from current `main` and the private profile on the event
   machine — no image builds, no manual database IDs, no SQL patching, no
   downloads during setup. Anything missing from the bundle fails the drill
   and gets fixed in the bundle, not on the machine.
@@ -16,20 +16,19 @@ Hard rules (from the F06 card, non-negotiable):
 - No waiving a failed gate because event day is close. Fix, rerun the
   affected phase, refreeze if artifacts changed.
 - A beginner rehearsal with real people is a **separate** gate; this
-  technical rehearsal cannot validate the 4–5 hour duration or learning
+  technical rehearsal cannot validate the six-hour schedule or learning
   outcomes.
 
 ## Prerequisites before the session
 
-- [ ] PR #49 (teardown/fencing fixes) merged — the drill exercises
-      `down --volumes` and `fence`; rehearsing without them rehearses the
-      old, broken semantics.
-- [ ] **New bundle assembled** on the build host: the current
-      `v0.9.0-drill` bundle lacks `dependencies/release-vault.tar.gz`
-      (fixed 2026-09-24). Reassemble:
+- [ ] The release tag, distribution manifest and offline bundle all identify
+      the same current source commit. Do not certify the historical
+      `v0.10.0-rehearsal` bundle; it predates dynamic eleven-team registration
+      and boot automation.
+- [ ] **Current bundle assembled** on the build host:
       `python scripts/assemble_offline_store.py --store work/offline-store --manifest work/offline-manifest.json --evidence work/evidence-public --case-template work/case-template --wazuh-config work/n1-run/wazuh-config --release-vault work/release/controller/releases` then
       `python -m ridge.bundle work/offline-store work/offline-manifest.json work/offline-bundle --allow-incomplete --max-part-bytes 2147483648`
-      and publish as a new pre-release (e.g. `v0.10.0-rehearsal`).
+      and publish as a new pre-release from current `main`.
 - [ ] Event profile prepared (`docs/event-day-commands.md` §1) with the
       real `<LAN-IP>`; runtime directory chosen (referred to as `R` below).
 - [ ] Presenter landing page open on the facilitator's laptop — open
@@ -54,16 +53,19 @@ bundle, restart phase 0.
 
 ## Phase 1 — Bring-up and F03 certifying run (~1 hour)
 
-Follow `docs/f03-rehearsal.md` verbatim. Session-specific additions:
+Use the load-test procedure and acceptance thresholds in
+`docs/f03-rehearsal.md`, but use the current dynamic profile and the commands
+below; the older fixed-roster startup example in that document is historical.
 
-- [ ] `up --teams 10` (timed); re-run `up` on "services not ready" — that
+- [ ] `up` with the current dynamic profile and no `--teams` argument (timed);
+      re-run `up` on "services not ready" — that
       is reconcile, not failure
 - [ ] `status` shows `event_ready: true`
 - [ ] `start` the exercise
 - [ ] **Cover the answer write path live** (the dev-box dress run only
       exercised reads): before starting the harness, claim one ticket in
       IRIS as one team so answer POSTs render
-- [ ] Run the harness: 10 teams × 3 sessions, 1800 s
+- [ ] Run the harness: 11 teams × 3 sessions, 1800 s
 - [ ] Manual desktop usability pass in parallel: 2–3 desktops via
       Guacamole, launch Autopsy, open the prepared case, run a search
 - [ ] Report says `CERTIFYING`; p95 < 2 s; outbox flat/draining; peak
@@ -83,9 +85,10 @@ All on the same stack, still offline:
       slides with room audio, and follows the participant landing page against
       the real stack. Confirm its displayed URLs match the running services.
       Any mismatch is a deck bug or a stack bug — file it.
-- [ ] **Handout dry-run**: print/copy team credentials from
-      `R/secrets/team-credentials.json`; confirm a cold reader can find
-      every login kind from the handout and participant landing page alone
+- [ ] **Registration/handout dry-run**: register a team with the room code,
+      bookmark its private retrieval page, download its labelled handout and
+      confirm a cold reader can find every login kind from those two artifacts
+      alone. Keep `R/secrets/team-credentials.json` operator-only.
 - [ ] **Ticket flow**: play at least one full ticket end-to-end (claim →
       investigate → answer → finding lands in IRIS → next ticket unlocks)
 - [ ] **Repeated up**: `down` (keep data), `up` again, confirm the event
