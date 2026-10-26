@@ -43,7 +43,7 @@ The current reusable event shape is
 [`example-dynamic-two-host-11-team.json`](deployment/profiles/example-dynamic-two-host-11-team.json)
 plus its matching private-host template,
 [`two-host-11-team.local.example.json`](deployment/examples/two-host-11-team.local.example.json).
-It declares exactly 33 desktop slots: 13 on the primary and 20 on
+It declares exactly 33 desktop slots: 14 on the primary and 19 on
 `worker-02`. Eleven teams are representable and pass the declared capacity
 model; they are **not performance-certified** until the human/load rehearsal
 passes on the event hardware.
@@ -86,7 +86,7 @@ a facilitated after-action review.
 
 Smaller profiles can run on one machine. The current eleven-team shape uses a
 primary plus one [desktop worker](docs/multi-host-desktops.md); browser services
-remain centralized on the primary while the worker carries 20 Guacamole
+remain centralized on the primary while the worker carries 19 Guacamole
 desktops. Sizing is based on live measurement of the real stack, not guesswork:
 
 - **32 GB RAM minimum for a smaller run; the current eleven-team event uses two
@@ -111,7 +111,7 @@ whole stack with two desktops, one under Autopsy load).
 ## Quick start
 
 **Hosting the event? Use the offline bundle** from the
-[releases page](https://github.com/Judge-M/Oct26/releases) and follow the
+[releases page](https://github.com/Judge-M/OperationSilentRidge/releases) and follow the
 [command sheet](docs/event-day-commands.md) — it covers install, content
 assets, and bring-up with exact commands.
 
@@ -127,8 +127,8 @@ come from the release bundle or the content pipeline documented in
 images:
 
 ```bash
-git clone https://github.com/Judge-M/Oct26.git
-cd Oct26
+git clone https://github.com/Judge-M/OperationSilentRidge.git
+cd OperationSilentRidge
 git lfs pull                                # fetch the evidence assets
 
 python -m ridge.deploy doctor               # check host prerequisites
@@ -242,13 +242,16 @@ backup → wipe → restore → keep-playing cycle has been drill-tested live.
 The local event is working software: the full lifecycle (build → provision →
 run → pause → backup → wipe → restore) has been exercised against the real
 stack, and a scripted walkthrough solved all 80 questions end-to-end with
-findings and points landing in IRIS and CTFd. An offline drill release,
-[`v0.9.0-drill`](https://github.com/Judge-M/Oct26/releases/tag/v0.9.0-drill),
-packages every image and asset and has been cold-install-tested from the
-release page alone (fresh download, hash-verified, all 13 images loaded). Its
-notes carry the install steps and the honest certification gaps. Event-day
-materials are ready: the operator command sheet
-(`docs/event-day-commands.md`) and the participant briefing deck
+findings and points landing in IRIS and CTFd. The newest published offline
+bundle is
+[`v0.10.0-rehearsal`](https://github.com/Judge-M/OperationSilentRidge/releases/tag/v0.10.0-rehearsal).
+It supersedes the `v0.9.x-drill` bundles, but it predates the current 11-team
+self-registration and boot-automation iteration. Do not replace a verified
+live installation with that older rehearsal bundle. A fresh deployment needs a
+new release built from current `main` and verified with
+[`docs/event-machine-cold-start.md`](docs/event-machine-cold-start.md).
+Event-day materials are ready: the operator command sheet
+(`docs/event-day-commands.md`) and the separate opening and closing room decks
 (`docs/event-day-deck/`).
 
 **Picking up development (human or agent): start at
@@ -257,8 +260,8 @@ section says what is done, what is in flight, and the single next action,
 with links to receipts and evidence. Task cards live alongside it in
 `docs/handoff/tasks/`.
 
-Before the
-late-October event, the remaining work is tracked in `docs/handoff/NEXT.md`:
+The remaining certification and release work is tracked in
+`docs/handoff/NEXT.md`:
 
 - Eleven-team human/load rehearsal on the actual two-host event hardware
 - Desktop image rebuild with the measured Autopsy heap cap, then the final
@@ -301,6 +304,6 @@ The [two-brief package](docs/handoff/audio-briefs/README.md) provides the approv
 introduction and final assessment from Faye Maxwell, SOC supervisor for Operation
 Silent Ridge. Both are room-wide facilitator cues: play the introduction once at
 the beginning and the conclusion once during wrap-up after the final assessment is
-visible. No participant page links to or plays the media. The package contains the
-canonical scripts and production handoff; final outro audio or video still requires
-production and listening acceptance.
+visible. No participant page links to or plays the media. The accepted videos are
+embedded in the opening and closing PPTX and ODP decks and retained under
+`docs/event-day-deck/media/` for rebuilds.

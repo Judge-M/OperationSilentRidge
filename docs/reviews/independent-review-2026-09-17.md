@@ -1,4 +1,4 @@
-# Operation Silent Ridge (Judge-M/Oct26) — Independent Review
+# Operation Silent Ridge (Judge-M/OperationSilentRidge) — Independent Review
 
 Review date: 2026-09-17 · Reviewed commit: `f4ad28b` (main, merge of PR #21)
 Reviewer ran the test suite against this commit: **221 tests, all passing, ~32 s**.

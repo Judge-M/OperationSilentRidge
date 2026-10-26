@@ -50,6 +50,11 @@ Expected package names:
 - `ghcr.io/judge-m/oct26-ctfd`
 - `ghcr.io/judge-m/oct26-desktop`
 
+The repository was renamed to `Judge-M/OperationSilentRidge`, but these GHCR
+package names intentionally retain the `oct26-` prefix. GitHub does not rename
+packages with a repository, and changing the prefix would break existing
+immutable release manifests, offline bundles, and event-host image caches.
+
 OCI source labels connect these packages to the repository. GitHub initially
 creates packages privately; configure visibility/access in package settings as
 appropriate. Workflow permissions grant `packages: write` only to image publishing

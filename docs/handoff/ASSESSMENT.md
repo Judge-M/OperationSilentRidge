@@ -12,7 +12,7 @@ The untracked `deployment/expanded/New-BuildVMs.ps1` in this local workspace is 
 
 > Status update (2026-09-17): PR #6 is closed and its required corrections are present on main — `docs/learning-objectives.md` already records T13/T14 acquisition UTC (no 120-second correction) and the corrected T15/T16 crosswalk (T16 as live snapshot, not validated memory evidence). This section is retained as the historical review record; no further action is needed on #6 itself.
 
-[PR](https://github.com/Judge-M/Oct26/pull/6), reviewed head `9dfa3c7e3c43037a276035b2bcfd9a46d8df4f50`. Two files: README link and `docs/learning-objectives.md`.
+[PR](https://github.com/Judge-M/OperationSilentRidge/pull/6), reviewed head `9dfa3c7e3c43037a276035b2bcfd9a46d8df4f50`. Two files: README link and `docs/learning-objectives.md`.
 
 **Relevance: high for learning design; low for deployment completion. Recommendation: retain, update, then merge separately.** Its objective/mechanism/evidence structure is useful for rehearsal and participant guidance. It does not alter runtime code.
 
@@ -31,7 +31,7 @@ The PR body contains obsolete baseline language; rewrite it around the final upd
 
 > Status update (2026-09-17): PR #7 is closed. The recommendation below (defer until rehearsal identifies a specific learning gap) still stands; treat the proposal as a nonbinding backlog document only.
 
-[PR](https://github.com/Judge-M/Oct26/pull/7), reviewed head `8583102b44679642e12fd2b9d1cd4709dfad7255`. One new proposal document; no imported challenge content.
+[PR](https://github.com/Judge-M/OperationSilentRidge/pull/7), reviewed head `8583102b44679642e12fd2b9d1cd4709dfad7255`. One new proposal document; no imported challenge content.
 
 **Relevance: optional future curriculum; low for the current critical path. Recommendation: defer until rehearsal identifies a specific learning gap.** Retaining the proposal as a clearly nonbinding backlog document is reasonable; do not treat its Phase 1 as required event work.
 

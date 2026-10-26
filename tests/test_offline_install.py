@@ -132,12 +132,12 @@ class VerifyTests(unittest.TestCase):
 
     def test_source_commit_must_match_checkout_and_distribution(self):
         distribution = self.tmp / 'distribution.json'
-        distribution.write_text(json.dumps({'repository': 'Judge-M/Oct26',
+        distribution.write_text(json.dumps({'repository': 'Judge-M/OperationSilentRidge',
                                             'source_commit': 'different'}))
         with self.assertRaises(InstallError) as ctx:
             verify_bundle(self.bundle, distribution_manifest=distribution)
         self.assertIn('distribution source commit', str(ctx.exception))
-        distribution.write_text(json.dumps({'repository': 'Judge-M/Oct26',
+        distribution.write_text(json.dumps({'repository': 'Judge-M/OperationSilentRidge',
                                             'source_commit': 'abc123'}))
         with self.assertRaises(InstallError) as ctx:
             verify_bundle(self.bundle, expected_source_commit='other',

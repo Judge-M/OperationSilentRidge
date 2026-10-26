@@ -9,8 +9,8 @@ Until this follow-up PR is merged, use branch `docs/portable-build-handoff`; aft
 Install Git, Git LFS and Python 3.12+ on the new machine, then:
 
 ```text
-git clone --branch docs/portable-build-handoff https://github.com/Judge-M/Oct26.git
-cd Oct26
+git clone --branch docs/portable-build-handoff https://github.com/Judge-M/OperationSilentRidge.git
+cd OperationSilentRidge
 git lfs install
 git lfs pull
 python -m unittest discover -s tests -v

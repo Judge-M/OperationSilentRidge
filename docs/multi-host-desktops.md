@@ -159,8 +159,8 @@ the relay ports from participant devices.
    verify `docker run --rm hello-world` locally.
 3. Install and start OpenSSH. Use key authentication for the event controller.
 4. Restrict inbound SSH to the primary host.
-5. Restrict the assigned VNC range to the primary host. For the current 20
-   worker slots mapped to ports 5901 through 5920 on a Windows worker:
+5. Restrict the assigned VNC range to the primary host. For the current 19
+   worker slots mapped to ports 5901 through 5919 on a Windows worker:
 
    ```powershell
    New-NetFirewallRule -DisplayName "Silent Ridge VNC from primary" `

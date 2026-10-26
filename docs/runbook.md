@@ -25,8 +25,8 @@ facilitator check-in.
 
 The current event uses
 `deployment/profiles/example-dynamic-two-host-11-team.json` with its matching
-`deployment/examples/two-host-11-team.local.example.json`: 13 desktop slots on
-the primary, 20 on `worker-02`, and external wildcard TLS on port 443. The
+`deployment/examples/two-host-11-team.local.example.json`: 14 desktop slots on
+the primary, 19 on `worker-02`, and external wildcard TLS on port 443. The
 33-slot shape is capacity-valid and representable, not performance-certified
 until the eleven-team human/load rehearsal passes.
 
