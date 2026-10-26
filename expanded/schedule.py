@@ -10,7 +10,7 @@ Two questions the model answers:
 
 1. Does the event fit the agreed window?  plan() lays out one event day and
    reports investigation vs facilitated time and whether the total lands in
-   the target window (default 240-300 minutes, event decision 2026-09-17).
+   the six-hour target window.
 2. How sensitive is that to beginner pace?  sensitivity() rescales the
    authored 65-minute ticket allowance (a planning figure, not a measurement)
    and shows the makespan at each multiplier, so the organizer can see how
@@ -36,6 +36,7 @@ from expanded.workload import schedule as simulate
 WINDOW_MIN, WINDOW_MAX = 330, 390
 DEFAULT_TARGET = 360
 DEFAULT_INVESTIGATION_MINUTES = 280
+DEFAULT_TEAMS = 11
 
 # Facilitated segments around the investigation block. AAR and breaks are
 # listed separately from investigation time by design (F04 acceptance).
@@ -59,12 +60,12 @@ def scaled_tickets(tickets, multiplier):
             for t in tickets]
 
 
-def plan(tickets, teams=10, multiplier=1.0, segments=None, target=DEFAULT_TARGET):
+def plan(tickets, teams=DEFAULT_TEAMS, multiplier=1.0, segments=None, target=DEFAULT_TARGET):
     """Lay out one event day.
 
     The investigation segment length equals the simulated makespan at the
     given pace multiplier; facilitated segments add their own minutes. The
-    total is compared against the target and the 240-300 minute window.
+    total is compared against the target and the 330-390 minute window.
     """
     if teams < 1:
         raise ValueError('teams must be positive')
@@ -96,12 +97,15 @@ def plan(tickets, teams=10, multiplier=1.0, segments=None, target=DEFAULT_TARGET
     }
 
 
-def sensitivity(tickets, teams=10, multipliers=(1.0, 1.25, 1.5, 1.75, 2.0)):
+def sensitivity(tickets, teams=DEFAULT_TEAMS, multipliers=(1.0, 1.25, 1.5, 1.75, 2.0)):
     """Makespan and event-day fit at each pace multiplier."""
     return [plan(tickets, teams, m) for m in multipliers]
 
 
 def render(plans, target=DEFAULT_TARGET):
+    if not plans:
+        raise ValueError('at least one plan is required')
+    base = plans[0]
     lines = [
         '# Event-day scheduling model (F04)',
         '',
@@ -110,15 +114,14 @@ def render(plans, target=DEFAULT_TARGET):
         'Facilitated segments, breaks and the AAR are accounted separately from '
         'investigation activity.',
         '',
-        'Target window: %d-%d minutes (midpoint %d). Ten teams, three desktop lanes each.'
-        % (WINDOW_MIN, WINDOW_MAX, target),
+        'Target window: %d-%d minutes (midpoint %d). %d teams, three desktop lanes each.'
+        % (WINDOW_MIN, WINDOW_MAX, target, base['teams']),
         '',
         '## Agenda at authored pace (multiplier 1.0)',
         '',
         '| Segment | Kind | Minutes |',
         '|---|---|---|',
     ]
-    base = plans[0]
     for segment in base['segments']:
         lines.append('| {title} | {kind} | {minutes} |'.format(**segment))
     lines += [
@@ -156,7 +159,7 @@ def render(plans, target=DEFAULT_TARGET):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--teams', type=int, default=10)
+    parser.add_argument('--teams', type=int, default=DEFAULT_TEAMS)
     parser.add_argument('--target', type=int, default=DEFAULT_TARGET)
     parser.add_argument('--config', type=Path, default=Path('expanded/config.json'))
     parser.add_argument('--output', type=Path, default=Path('docs/schedule-model.md'))

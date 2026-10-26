@@ -14,7 +14,9 @@ Works on Windows (Git Bash) or Linux. Requirements first:
 
 - Docker Desktop / Docker Engine **running** (verify: `docker version`)
 - Python 3.11+ (`python --version`), Git, and [GitHub CLI](https://cli.github.com/) (`gh auth login` if the repo is private)
-- 32 GB RAM / 16 cores for 10 teams (64 GB comfortable), ~60 GB free disk
+- For the current eleven-team profile: two 64 GB / 20-thread hosts and at
+  least 100 GB free disk on each. Smaller profiles may use one host after
+  their capacity is validated.
 - No internet needed after the download step
 
 Everything below runs in **Git Bash** (Windows) or any shell (Linux),
@@ -111,30 +113,34 @@ and the build receipts under `work/install/source/work/build-receipts`.
 
 ## 6. Profile + runtime config (5 min)
 
-Get the machine's LAN IP (`ipconfig` / `ip addr` — the address participant
-laptops will reach). From the installed source tree:
+Get the machines' fixed LAN IPs (`ipconfig` / `ip addr`). Participant laptops
+reach the primary; the primary reaches the desktop worker. From the installed
+source tree on the primary:
 
 ```bash
-cp deployment/profiles/example-two-team.json ../event-profile.json
+cp deployment/profiles/example-dynamic-two-host-11-team.json ../event-profile.json
 mkdir -p ../runtime
-cp ../runtime-local.example.json ../runtime/local.json
+cp deployment/examples/two-host-11-team.local.example.json ../runtime/local.json
 ```
 
-Edit `../event-profile.json` — **only** these fields:
+Follow [Operator command sheet §1–§2](event-day-commands.md#1-current-two-host-profile-one-time-preparation)
+to edit only the documented fields in these two files. In particular:
 
 - `event.event_start`, `event.duration_minutes`
-- `addresses.central_bind_ip` → the LAN IP
-- the three `*_public_url` values → `https://<LAN-IP>:8081`, `:8083`, `:8082`
+- `addresses.central_bind_ip` → the primary LAN IP
+- the public URLs → the four `https://*.cyberexperts.org` names on port 443
+- the worker address if it is not `192.168.1.3`
+- the installed asset paths, Docker relay CIDR and wildcard-certificate paths
 
-Edit `../runtime/local.json` and replace `REPLACE_WITH_LAN_IP` with the event
-host's LAN address. Its asset paths already point at the trees materialized by
-the installer.
+Do not add a fixed roster and do not pass `--teams`. Registration admits up to
+the profile's validated `max_teams`; the current profile contains exactly 33
+desktop slots for eleven teams.
 
 ## 7. Bring the stack up (10–20 min)
 
 ```bash
 python -m ridge.deploy doctor --profile ../event-profile.json --runtime ../runtime
-python -m ridge.deploy up --teams 10 --profile ../event-profile.json --runtime ../runtime
+python -m ridge.deploy up --profile ../event-profile.json --runtime ../runtime
 # "services not ready"? just re-run the same up command — it reconciles
 python -m ridge.deploy status --profile ../event-profile.json --runtime ../runtime
 # expect: event_ready: true

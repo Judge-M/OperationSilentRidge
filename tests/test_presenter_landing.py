@@ -122,6 +122,20 @@ class PresenterLandingTests(unittest.TestCase):
             text.count('<td>Re-run') + text.count('data-copy'), 1)
         for row in ('reconciles', 'recover', 'backup'):
             self.assertIn(row, text)
+        self.assertNotIn('--teams 10', text)
+        self.assertIn(
+            'ridge.cli --state R/state/state.sqlite announce --operator EXCON',
+            text)
+        self.assertIn(
+            'recover T03 --team team-03 --generation N --operator EXCON',
+            text)
+
+    def test_credentials_are_delivered_only_by_private_registration_handout(self):
+        text = page()
+        self.assertIn('private registration retrieval page', text)
+        self.assertIn('downloadable handout', text)
+        self.assertIn('operator-only recovery material', text)
+        self.assertNotIn('handed out from the private\n  runtime directory', text)
 
     def test_page_contains_no_credentials_or_secrets_paths(self):
         text = page()

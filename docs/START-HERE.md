@@ -22,8 +22,10 @@ use the ODP copies instead of opening the PPTX files.
 
 ## Before event day
 
-- [ ] Use the published offline release bundle. Do not plan to build from source
-      at the venue.
+- [ ] Use a verified offline release bundle built from current `main`. The
+      published `v0.10.0-rehearsal` bundle predates the current eleven-team
+      registration and boot-automation iteration. Do not plan to build from
+      source at the venue.
 - [ ] Prepare both Windows event servers. The current eleven-team shape uses a
       64 GB / 20-thread primary and an equivalent worker; a single 64 GB host is
       only for a smaller profile.

@@ -1,14 +1,13 @@
 # Operation Silent Ridge
 
-A cooperative, defensive incident-response exercise with capacity derived from
-the validated event hardware. The current desktop pool supports **up to eleven
-teams of five** when all 33 desktop slots fit the deployment profile.
-Participants investigate a fictional breach using real forensics and detection
-tools — Autopsy, Wireshark, Cutter and Wazuh — coordinated through a shared
-IRIS case, with questions and scoring in CTFd. Teams claim investigation
-tickets, submit findings, and earn equal-value points that persist even when a
-ticket changes hands. Everything in the scenario is fictional; the evidence,
-the tools, and the teamwork are real.
+A cooperative, defensive incident-response exercise. The current two-server
+profile supports **up to eleven teams of five**. Each team receives three
+shared desktops, for 33 desktops total. Participants investigate a fictional
+breach using Autopsy, Wireshark, Cutter and Wazuh, coordinate work in IRIS, and
+answer scored questions in CTFd. Every team works through the same 20 tickets
+and 80 questions independently, while verified findings contribute to the
+shared incident picture. Everything in the scenario is fictional; the
+evidence, tools and teamwork are real.
 
 This repository contains the full event: the authored scenario and evidence,
 the tooling that builds and runs it, the participant materials, and the
@@ -48,17 +47,25 @@ It declares exactly 33 desktop slots: 14 on the primary and 19 on
 model; they are **not performance-certified** until the human/load rehearsal
 passes on the event hardware.
 
-Do not build from source on event day. Install the published offline release
-bundle, keep runtime secrets outside the repository, and use the two room-wide
-brief decks. Use PPTX in PowerPoint and ODP in LibreOffice Impress.
+Do not rebuild or reinstall the event servers on event day. Use the already
+verified event installation, keep runtime secrets outside the repository, and
+use the two room-wide brief decks. Use PPTX in PowerPoint and ODP in
+LibreOffice Impress. The newest public bundle is older than the current event
+iteration; the release limitation is explained under [Project status](#project-status).
 
 ### Participant start
 
-Connect to the event network and open the registration address shown by the
-facilitator. A team captain registers once and bookmarks the private retrieval
-page. That page contains the team's logins and three Guacamole desktop names.
-Use IRIS, CTFd and Wazuh in normal laptop browser tabs. Use Guacamole only for
-Autopsy, Wireshark, Cutter and the desktop file manager.
+Connect to the event network and open:
+
+```text
+https://ctfd.cyberexperts.org/silent-ridge/register
+Enrollment code: SILENT-RIDGE
+```
+
+One captain registers the team and bookmarks the private retrieval page. That
+page contains the team's logins and three Guacamole desktop names. Use IRIS,
+CTFd and Wazuh in normal laptop browser tabs. Use Guacamole only for Autopsy,
+Wireshark, Cutter and the desktop file manager.
 
 ## What participants experience
 
@@ -68,7 +75,8 @@ happens in the participants' own browser tabs; nothing is installed on their
 laptops.
 Teams:
 
-1. Claim up to three investigation tickets in IRIS (the shared incident case).
+1. Claim up to three team-local investigation tickets at once in IRIS. Other
+   teams can investigate the same tickets independently.
 2. Investigate with the desktop tools: disk images in Autopsy, network
    captures in Wireshark, a suspicious binary in Cutter, logs in Wazuh.
 3. Answer the ticket's questions in CTFd. An unassisted correct answer scores
@@ -79,8 +87,11 @@ Teams:
 4. Every team works through all 20 tickets and 80 questions. Later phases unlock
    only when that team completes the required earlier phase.
 
-The event is designed for a 4–5 hour day including orientation, a break, and
-a facilitated after-action review.
+The current event schedule is a six-hour hard stop: 25 minutes of orientation,
+280 minutes of investigation, a 10-minute operational update, a 15-minute
+break, and a 30-minute facilitated after-action review. Only a representative
+human rehearsal can establish whether teams finish all 80 questions in that
+window.
 
 ## What you need to host it locally
 
@@ -110,16 +121,29 @@ whole stack with two desktops, one under Autopsy load).
 
 ## Quick start
 
-**Hosting the event? Use the offline bundle** from the
-[releases page](https://github.com/Judge-M/OperationSilentRidge/releases) and follow the
-[command sheet](docs/event-day-commands.md) — it covers install, content
-assets, and bring-up with exact commands.
+### Existing event servers
 
-Building from source is the **online preparation/developer path**. It may
+Follow [Run Operation Silent Ridge](docs/START-HERE.md). For the normal tested
+path, power on the worker first and then the primary, sign in if the configured
+boot mode requires it, wait for the registration page, and present the opening
+deck. Facilitators run no server commands.
+
+### Fresh installation
+
+Do not use `v0.10.0-rehearsal` as though it were the current event build. It
+predates the 11-team self-registration and boot-automation iteration. A fresh
+host needs a new release cut from current `main`, followed by the complete
+[cold-machine installation](docs/event-machine-cold-start.md). Existing
+verified live installations should remain in place until their replacement has
+passed the same cold-install and rehearsal gates.
+
+### Developer/source checkout
+
+Building from source is an **online preparation/developer path**. It may
 download base images, operating-system packages, and pinned tool archives even
 when Docker already has the base image cached. Cache preference does not make a
 source build suitable for an air-gapped event host; the complete release bundle
-above is the sole supported offline event path. Note that
+is the supported offline event path. Note that
 `build --component all` produces only the container images — the content
 assets (evidence tree, Autopsy case template, Wazuh config, release vault)
 come from the release bundle or the content pipeline documented in
@@ -164,13 +188,14 @@ The landing page contains the initial brief; each registration reserves five
 seats and three GUI-only desktops, starts those three slots through the
 host-side allocator, creates the CTFd/IRIS/Guacamole identities, and returns a
 bookmarkable handout with all URLs, credentials, and exact Guacamole connection
-names. The runtime registration
-database is private and is not part of the repository.
+names. The runtime registration database is private and is not part of the
+repository.
 
 `up` builds out the entire stack and stops at a verified, paused state —
 nothing is visible to participants until you explicitly `start`. The `runtime`
-directory is private: it holds the event's secrets, state, and the team
-account inventories you hand out to participants. On Windows, `ridge.ps1`
+directory is private: it holds the event's secrets, state, and operator-only
+recovery inventories. Participants receive credentials only through their
+private registration page and downloadable handout. On Windows, `ridge.ps1`
 wraps the same commands (`.\ridge.ps1 prepare / up / status / start ...`).
 
 In the event's trusted public-TLS mode, participants use these port-443 names.
@@ -194,9 +219,10 @@ requires the participant trust steps in
 
 ## Running the event
 
-On event day, the [presenter landing page](docs/presenter-landing.html) is
-the single entry point on the presenter PC: deck, participant URLs, operator
-docs, run-of-show, and runbook quick reference — one offline file.
+On event day, the [presenter landing page](docs/presenter-landing.html) is an
+offline index for the decks, participant URLs, operator documents, run of show
+and quick reference. [START-HERE](docs/START-HERE.md) remains the authoritative
+beginner checklist.
 
 The [event-day command sheet](docs/event-day-commands.md) is the
 cold-machine → running-event → teardown checklist with exact commands.
@@ -209,12 +235,14 @@ The [facilitator closing brief](docs/facilitator-closing-brief.md) is the
 canonical ending used after T20. Completion automatically reveals the final
 assessment and containment actions in CTFd and publishes the same assessment
 to IRIS. The facilitator then plays or reads the outro once for the entire
-room; participant-controlled media playback is intentionally unavailable.
+room; participant-controlled media playback is intentionally unavailable. The
+[approved scripts and production handoff](docs/handoff/audio-briefs/README.md)
+remain with the accepted source videos.
 
 ```bash
 python -m ridge.deploy pause   --profile ... --runtime ...   # pause the clock
-python -m ridge.cli announce --operator EXCON --text "..."   # message all teams
-python -m ridge.cli recover T03 --generation 1 --operator EXCON --reason "..."
+python -m ridge.cli --state path/to/runtime/state/state.sqlite announce --operator EXCON --text "..."
+python -m ridge.cli --state path/to/runtime/state/state.sqlite recover T03 --team team-03 --generation N --operator EXCON --reason "..."
 ```
 
 Facilitator materials (solutions, coaching and AAR guides) live in
@@ -264,9 +292,10 @@ The remaining certification and release work is tracked in
 `docs/handoff/NEXT.md`:
 
 - Eleven-team human/load rehearsal on the actual two-host event hardware
-- Desktop image rebuild with the measured Autopsy heap cap, then the final
-  event release, operator freeze, and dress rehearsal
-- A beginner rehearsal to validate the 4–5 hour duration with real people
+- A current offline release, cold-install validation, operator freeze and dress
+  rehearsal
+- A powered-off reboot test proving the configured startup guarantee
+- A beginner rehearsal to validate the six-hour schedule with real people
 - AWS deployment option (AMI, cloud fencing, teardown) — deferred until the
   local release is proven
 
@@ -297,13 +326,3 @@ Project-authored source code and documentation are licensed under the
 [Apache License 2.0](LICENSE). Third-party components, container images,
 evidence and assets retain their respective licenses and notices; see
 [NOTICE](NOTICE).
-
-## Room-wide narrative briefs
-
-The [two-brief package](docs/handoff/audio-briefs/README.md) provides the approved
-introduction and final assessment from Faye Maxwell, SOC supervisor for Operation
-Silent Ridge. Both are room-wide facilitator cues: play the introduction once at
-the beginning and the conclusion once during wrap-up after the final assessment is
-visible. No participant page links to or plays the media. The accepted videos are
-embedded in the opening and closing PPTX and ODP decks and retained under
-`docs/event-day-deck/media/` for rebuilds.

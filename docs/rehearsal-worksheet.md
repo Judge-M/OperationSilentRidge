@@ -1,4 +1,4 @@
-# Ten-team rehearsal worksheet
+# Eleven-team rehearsal worksheet
 
 Record observations here during a beginner rehearsal. Estimated columns come from `docs/workload.md` and are arithmetic; the measured columns are the evidence.
 
@@ -18,6 +18,7 @@ Duration target: 360 minutes. Estimated makespan: 585 minutes. Estimated team-mi
 | team-08 | T01, T02, T03, T04, T05, T06, T07, T08, T10, T09, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20 | 1300 | | | | | |
 | team-09 | T01, T02, T03, T04, T05, T06, T07, T08, T10, T09, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20 | 1300 | | | | | |
 | team-10 | T01, T02, T03, T04, T05, T06, T07, T08, T10, T09, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20 | 1300 | | | | | |
+| team-11 | T01, T02, T03, T04, T05, T06, T07, T08, T10, T09, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20 | 1300 | | | | | |
 
 ## Per-ticket observations
 

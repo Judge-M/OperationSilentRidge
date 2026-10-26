@@ -151,9 +151,9 @@
     <div><a href="schedule-model.md"><strong>Schedule model (F04)</strong></a>
       — the arithmetic behind the run-of-show below.</div>
   </div>
-  <p class="warn">Team logins and the Wazuh reader login are handed out from the private
-  runtime directory per the runbook, event-day step 4. This page deliberately contains
-  no operator or team credentials.</p>
+  <p class="warn">A captain receives the team's logins and Wazuh reader account on the
+  private registration retrieval page and downloadable handout. Runtime credential files
+  are operator-only recovery material. This page deliberately contains no credentials.</p>
 </section>
 
 <section id="run-of-show">
@@ -208,15 +208,17 @@
     </tbody>
   </table>
 
-  <h2 style="margin-top:18px">Commands actually typed during play</h2>
-  <p class="note">From <a href="event-day-commands.md">event-day-commands.md</a> §3–§7.
-  <code>event-profile.json</code> and <code>R</code> are your profile and private runtime directory.</p>
+  <h2 style="margin-top:18px">Operator-only recovery commands</h2>
+  <p class="note">The normal facilitator path uses no commands. These come from
+  <a href="event-day-commands.md">event-day-commands.md</a> §3–§7 for an operator
+  responding to a problem. <code>event-profile.json</code> and <code>R</code> are the
+  production profile and private runtime directory.</p>
   <ul class="cmds">
     <li><span class="name">status</span>
       <code data-copy="python -m ridge.deploy status --profile event-profile.json --runtime R">python -m ridge.deploy status --profile event-profile.json --runtime R</code>
       <button class="copy" type="button">Copy</button></li>
     <li><span class="name">up</span>
-      <code data-copy="python -m ridge.deploy up --teams 10 --profile event-profile.json --runtime R">python -m ridge.deploy up --teams 10 --profile event-profile.json --runtime R</code>
+      <code data-copy="python -m ridge.deploy up --profile event-profile.json --runtime R">python -m ridge.deploy up --profile event-profile.json --runtime R</code>
       <button class="copy" type="button">Copy</button></li>
     <li><span class="name">start</span>
       <code data-copy="python -m ridge.deploy start --profile event-profile.json --runtime R">python -m ridge.deploy start --profile event-profile.json --runtime R</code>
@@ -225,10 +227,10 @@
       <code data-copy="python -m ridge.deploy pause --profile event-profile.json --runtime R">python -m ridge.deploy pause --profile event-profile.json --runtime R</code>
       <button class="copy" type="button">Copy</button></li>
     <li><span class="name">announce</span>
-      <code data-copy="python -m ridge.cli announce --operator EXCON --text &quot;...&quot;">python -m ridge.cli announce --operator EXCON --text "..."</code>
+      <code data-copy="python -m ridge.cli --state R/state/state.sqlite announce --operator EXCON --text &quot;...&quot;">python -m ridge.cli --state R/state/state.sqlite announce --operator EXCON --text "..."</code>
       <button class="copy" type="button">Copy</button></li>
     <li><span class="name">recover</span>
-      <code data-copy="python -m ridge.cli recover T03 --generation 1 --operator EXCON --reason &quot;...&quot;">python -m ridge.cli recover T03 --generation 1 --operator EXCON --reason "..."</code>
+      <code data-copy="python -m ridge.cli --state R/state/state.sqlite recover T03 --team team-03 --generation N --operator EXCON --reason &quot;...&quot;">python -m ridge.cli --state R/state/state.sqlite recover T03 --team team-03 --generation N --operator EXCON --reason "..."</code>
       <button class="copy" type="button">Copy</button></li>
     <li><span class="name">backup</span>
       <code data-copy="python -m ridge.deploy backup --profile event-profile.json --runtime R">python -m ridge.deploy backup --profile event-profile.json --runtime R</code>

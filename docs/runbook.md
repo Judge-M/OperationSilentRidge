@@ -5,8 +5,8 @@ Everything here is a drill-tested command; where a step has not been run on the
 event hardware yet, it says so. One page of event-day instructions, recovery
 appendices after.
 
-Conventions: `P` = your profile JSON (copy of
-`deployment/profiles/example-dynamic.json`, adjusted), `R` = your private
+Conventions: `P` = your profile JSON (for the current event, a copy of
+`deployment/profiles/example-dynamic-two-host-11-team.json`, adjusted), `R` = your private
 runtime directory (secrets, state, inventories — never commit it, never give it
 to participants). Windows operators may use `.\ridge.ps1 <action> -Profile P
 -Runtime R` instead of `python -m ridge.deploy`.
@@ -166,7 +166,7 @@ before any cloud run.
 ## Known limitations (as of this writing)
 
 - Eleven teams are representable by the 33-slot two-host profile and pass the
-  declared capacity model. Eleven-team performance and the 4–5 h duration are
+  declared capacity model. Eleven-team performance and the six-hour schedule are
   not certified until the human/load rehearsal passes on the event hardware.
 - AWS provider, site switch, and off-box backup copy are not built.
 - The Windows launcher `prepare` path is verified on this host only; a
